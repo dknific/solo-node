@@ -5,8 +5,16 @@ function sortByKey(array, key, keyIsNumber) {
         let x, y;
     
         if (keyIsNumber) {
-            x = parseInt(a[key]);
-            y = parseInt(b[key]);
+            let tempA = a[key].replace(/\,/g,'');
+            let tempB = b[key].replace(/\,/g,'');
+            
+            // Mass and heights with 'uknown' value will be
+            // thrown to the bottom of the list:
+            if (tempA === 'unknown') tempA = '99999';
+            if (tempB === 'unknown') tempB = '99999';
+
+            x = parseInt(tempA);
+            y = parseInt(tempB);
         } else {
             x = a[key];
             y = b[key];
